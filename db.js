@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
-const mongoURI = "mongodb://localhost:27017/?directConnection=true&tls=false";
+const mongoURI =
+  "mongodb://localhost:27017/myNotes?directConnection=true&tls=false";
 
 const connectDB = async () => {
   await mongoose.connect(mongoURI);
