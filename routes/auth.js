@@ -1,4 +1,5 @@
-require("dotenv").config({ path: "./.env.local" });
+const path = require("path");
+require("dotenv").config({ path: path.resolve(__dirname, ".env.local") });
 const express = require("express");
 const router = express.Router();
 const User = require("../models/User");
@@ -50,7 +51,9 @@ router.post(
       });
       res.json({ authToken });
     } catch (err) {
-      res.status(500).send("Internal server error");
+      console.error("Error during registration:", err.message);
+      console.error(err.stack);
+      res.status(500).json({ error: "Internal server error" });
     }
   }
 );

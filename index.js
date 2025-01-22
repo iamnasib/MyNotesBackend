@@ -1,4 +1,5 @@
-// Express server file
+const path = require("path");
+require("dotenv").config({ path: path.resolve(__dirname, ".env.local") });
 const express = require("express");
 const connectDB = require("./db");
 
@@ -17,6 +18,7 @@ const startServer = async () => {
     // });
     app.listen(port, () => {
       console.log(`Server is running on port ${port}`);
+      console.log("JWT_SECRET:", process.env.JWT_SECRET);
     });
   } catch (error) {
     console.error("Failed to start server", error);
