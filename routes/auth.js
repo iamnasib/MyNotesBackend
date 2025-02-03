@@ -66,6 +66,7 @@ router.post(
   ],
   async (req, res) => {
     try {
+      console.log("test");
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
@@ -74,7 +75,7 @@ router.post(
       const { email, password } = req.body;
       let user = await User.findOne({ email });
       if (!user) {
-        return res.status(400).jsin({ error: "Invalid credentials" });
+        return res.status(400).json({ error: "Invalid credentials" });
       }
 
       //check if password matches
@@ -89,13 +90,14 @@ router.post(
       });
       res.json({ authToken });
     } catch (error) {
-      res.status(500).send("Internal server error");
+      console.log(error);
+      res.status(500).send("Internal server error", error);
     }
   }
 );
 
-//Get user details using POST, /api/auth/getuser
-router.post("/getuser", fetchuser, async (req, res) => {
+//Get user details using get, /api/auth/getuser
+router.get("/getuser", fetchuser, async (req, res) => {
   try {
     const userId = req.user.userId;
     const user = await User.findById(userId).select("-password");

@@ -2,6 +2,7 @@ const path = require("path");
 require("dotenv").config({ path: path.resolve(__dirname, ".env.local") });
 const express = require("express");
 const connectDB = require("./db");
+var cors = require("cors");
 
 const startServer = async () => {
   try {
@@ -9,6 +10,7 @@ const startServer = async () => {
     const app = express();
     const port = 5000;
     app.use(express.json());
+    app.use(cors());
 
     app.use("/api/auth", require("./routes/auth"));
     app.use("/api/notes", require("./routes/notes"));

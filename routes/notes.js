@@ -52,6 +52,17 @@ router.get("/getnotes", fetchuser, async (req, res) => {
   }
 });
 
+//Get user Notes using Get, /api/notes/getnotes
+router.get("/getnote/:id", fetchuser, async (req, res) => {
+  try {
+    const note = await Note.findById(req.params.id);
+    res.json({ note });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Internal server error");
+  }
+});
+
 //Update a Note linked to a authenticated user using PATCH, /api/notes/update/:id
 router.patch(
   "/update/:id",

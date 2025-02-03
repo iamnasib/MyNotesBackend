@@ -12,7 +12,9 @@ const fetchuser = async (req, res, next) => {
     req.user = data;
     next();
   } catch (error) {
-    return res.status(500).send({ error: "Fetch User Internal server error" });
+    return res
+      .status(500)
+      .send({ error: "Fetch User Internal server error", err: error });
   }
 };
 
