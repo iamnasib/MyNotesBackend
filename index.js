@@ -10,7 +10,12 @@ const startServer = async () => {
     const app = express();
     const port = 5000;
     app.use(express.json());
-    app.use(cors());
+    const corsOptions = {
+      origin: "*", // Allow all origins
+      optionsSuccessStatus: 200,
+    };
+
+    app.use(cors(corsOptions));
 
     app.use("/api/auth", require("./routes/auth"));
     app.use("/api/notes", require("./routes/notes"));
@@ -20,7 +25,7 @@ const startServer = async () => {
     // });
     app.listen(port, () => {
       console.log(`Server is running on port ${port}`);
-      console.log("JWT_SECRET:", process.env.JWT_SECRET);
+      console.log(process.env.DB_URI);
     });
   } catch (error) {
     console.error("Failed to start server", error);
