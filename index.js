@@ -25,7 +25,6 @@ const startServer = async () => {
     // });
     app.listen(port, () => {
       console.log(`Server is running on port ${port}`);
-      console.log(process.env.DB_URI);
     });
   } catch (error) {
     console.error("Failed to start server", error);
